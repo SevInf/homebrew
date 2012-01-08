@@ -1,22 +1,18 @@
 require 'formula'
 
 class Libspatialite < Formula
-  url 'http://www.gaia-gis.it/spatialite-2.4.0-5/libspatialite-amalgamation-2.4.0.tar.gz'
-  version '2.4.0-rc5'
-  homepage 'http://www.gaia-gis.it/spatialite/'
-  md5 '33f8db72f4b6d863a2e0f4b2bed31a74'
+  url 'http://www.gaia-gis.it/gaia-sins/libspatialite-amalgamation-3.0.1.tar.gz'
+  homepage 'https://www.gaia-gis.it/fossil/libspatialite/index'
+  md5 'df7f0f714c2de1dc2791ddef6e8eaba5'
 
   depends_on 'proj'
   depends_on 'geos'
+  depends_on 'freexl'
 
   def install
-    # O2 and O3 leads to corrupt/invalid rtree indexes
-    # http://groups.google.com/group/spatialite-users/browse_thread/thread/8e1cfa79f2d02a00#
-    ENV.Os
-    system "./configure", "--disable-debug",
-                          "--disable-dependency-tracking",
-                          "--prefix=#{prefix}",
-                          "--target=macosx"
+    system "./configure", "--disable-dependency-tracking",
+                          "--prefix=#{prefix}"
+    system "make"
     system "make install"
   end
 end
